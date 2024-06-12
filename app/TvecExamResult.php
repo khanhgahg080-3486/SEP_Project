@@ -4,12 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TvecExamResult extends Model
+class kafaExamResult extends Model
 {
-    public function student(){
+    public function student()
+    {
         return $this->belongsTo('App\Student');
     }
-    public function tvec_exam(){
-        return $this->belongsTo('App\TvecExam');
+    public function kafa_exam()
+    {
+        return $this->belongsTo('App\kafaExam');
     }
 }

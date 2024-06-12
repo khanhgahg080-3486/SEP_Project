@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTvecExamResultsTable extends Migration
+class CreatekafaExamResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateTvecExamResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tvec_exam_results', function (Blueprint $table) {
+        Schema::create('kafa_exam_results', function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
-            $table->bigInteger('tvec_exam_id')->unsigned();
-            $table->foreign('tvec_exam_id')->references('id')->on('tvec_exams')->onUpdate('cascade');
+            $table->bigInteger('kafa_exam_id')->unsigned();
+            $table->foreign('kafa_exam_id')->references('id')->on('kafa_exams')->onUpdate('cascade');
             $table->bigInteger('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onUpdate('cascade');
             $table->tinyInteger('attempt');
-            $table->char('result',10);
+            $table->char('result', 10);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateTvecExamResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tvec_exam_results');
+        Schema::dropIfExists('kafa_exam_results');
     }
 }

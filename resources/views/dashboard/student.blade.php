@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('title')
-   Student Dashboard
+    Student Dashboard
 @endsection
 @section('content')
     <div class="card mb-3">
@@ -27,7 +27,7 @@
                         <div class="card-body ">
                             <div class="align-items-center row">
                                 <div class="col-md-12">
-                                    <div class="h1 font-weight-lighter"> {{$count_course->count}}</div>
+                                    <div class="h1 font-weight-lighter"> {{ $count_course->count }}</div>
                                 </div>
                                 <div class="col-auto text-right">
                                 </div>
@@ -47,11 +47,12 @@
                         <div class="card-body">
                             <div class="align-items-center row">
                                 <div class="col-md-12">
-                                    <div class="h1 font-weight-lighter">{{$count_exam->count}}
+                                    <div class="h1 font-weight-lighter">{{ $count_exam->count }}
                                         <span
-                                            hidden>{{$per = ($count_exam->count!=0)? round(($count_exams_pass->count/$count_exam->count)*100) : 0}}</span>
+                                            hidden>{{ $per = $count_exam->count != 0 ? round(($count_exams_pass->count / $count_exam->count) * 100) : 0 }}</span>
                                         <span
-                                            class="font-weight-bold {{($per>=60 && $per<80)? 'text-warning':(($per<60)?'text-danger':'text-primary')}} h6"> {{$per}}% </span><span class="h6"> Pass Rate</span>
+                                            class="font-weight-bold {{ $per >= 60 && $per < 80 ? 'text-warning' : ($per < 60 ? 'text-danger' : 'text-primary') }} h6">
+                                            {{ $per }}% </span><span class="h6"> Pass Rate</span>
 
                                     </div>
                                 </div>
@@ -91,11 +92,12 @@
                         <div class="card-body ">
                             <div class="align-items-center row">
                                 <div class="col-md-12">
-                                    <div class="h1 font-weight-lighter">{{$count_attendance->count}}
+                                    <div class="h1 font-weight-lighter">{{ $count_attendance->count }}
                                         <span
-                                            hidden>{{$per =($count_attendance->count!=0)? round(($count_attendance->present/$count_attendance->count)*100) : 0}}</span>
+                                            hidden>{{ $per = $count_attendance->count != 0 ? round(($count_attendance->present / $count_attendance->count) * 100) : 0 }}</span>
                                         <span
-                                            class="font-weight-bold {{($per>=60 && $per<80)? 'text-warning':(($per<60)?'text-danger':'text-primary')}} h6"> {{$per}}% </span><span class="h6"> Present Rate</span>
+                                            class="font-weight-bold {{ $per >= 60 && $per < 80 ? 'text-warning' : ($per < 60 ? 'text-danger' : 'text-primary') }} h6">
+                                            {{ $per }}% </span><span class="h6"> Present Rate</span>
                                     </div>
                                 </div>
                             </div>
@@ -136,24 +138,24 @@
                                         </div>
                                     </div>
                                 </div>
-                                @foreach($enrolls as $enroll)
+                                @foreach ($enrolls as $enroll)
                                     <div class="card-body text-center">
                                         <div class="align-items-center row">
                                             <div class="col-12">
-                                                <div class="h1 font-weight-lighter">{{$enroll->status}} </div>
+                                                <div class="h1 font-weight-lighter">{{ $enroll->status }} </div>
                                             </div>
                                             <div class="col-12 ">
-                                                <div>{{$enroll->course->name}}</div>
+                                                <div>{{ $enroll->course->name }}</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer border-0">
                                         <div class="row ">
                                             <div class="col">
-                                                <div>{{$enroll->course_mode}}</div>
+                                                <div>{{ $enroll->course_mode }}</div>
                                             </div>
                                             <div class="col-auto">
-                                                <div>{{$enroll->enroll_date}}</div>
+                                                <div>{{ $enroll->enroll_date }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +168,7 @@
                                 <div class="card-header  border-0">
                                     <div class="align-items-center row">
                                         <div class="col">
-                                            <p class="mb-0 font-weight-lighter"> TVEC Examination Overview</p>
+                                            <p class="mb-0 font-weight-lighter"> KAFA Examination Overview</p>
                                         </div>
                                     </div>
                                 </div>
@@ -174,13 +176,15 @@
                                     <div class="align-items-center row">
                                         <div class="col">
                                             <span
-                                                hidden>{{$per = round(($enroll_exams->tvec_exam_pass/(($enroll_exams->tvec_exam_modules==0)?1:$enroll_exams->tvec_exam_modules))*100)}}</span>
-                                            <div class="h1 font-weight-lighter"><span class="{{($per>=60 && $per<80)? 'text-warning':(($per<60)?'text-danger':'text-primary')}}">{{$per}}</span> <span class="text-muted h6">% Pass Rate</span>
+                                                hidden>{{ $per = round(($enroll_exams->kafa_exam_pass / ($enroll_exams->kafa_exam_modules == 0 ? 1 : $enroll_exams->kafa_exam_modules)) * 100) }}</span>
+                                            <div class="h1 font-weight-lighter"><span
+                                                    class="{{ $per >= 60 && $per < 80 ? 'text-warning' : ($per < 60 ? 'text-danger' : 'text-primary') }}">{{ $per }}</span>
+                                                <span class="text-muted h6">% Pass Rate</span>
                                             </div>
                                         </div>
                                         <div class="col-auto text-right">
-                                            <div>{{$enroll_exams->tvec_exam_pass}} Pass</div>
-                                            <div>{{$enroll_exams->tvec_exam_modules}} Exams</div>
+                                            <div>{{ $enroll_exams->kafa_exam_pass }} Pass</div>
+                                            <div>{{ $enroll_exams->kafa_exam_modules }} Exams</div>
                                         </div>
                                     </div>
                                 </div>
@@ -200,16 +204,14 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
     <script>
-
-        var JSONObject = JSON.parse('{{$labels}}'.replace(/&quot;/g, '"'));
+        var JSONObject = JSON.parse('{{ $labels }}'.replace(/&quot;/g, '"'));
         console.log(JSONObject);
         var coloR = [];
 
-        var dynamicColors = function () {
+        var dynamicColors = function() {
             var r = Math.floor(Math.random() * 255);
             var g = Math.floor(Math.random() * 255);
             var b = Math.floor(Math.random() * 255);
@@ -227,7 +229,7 @@
                 labels: JSONObject,
                 datasets: [{
                     label: '% of Attendance',
-                    data: {{$datas}},
+                    data: {{ $datas }},
                     backgroundColor: coloR,
                     borderColor: 'rgba(200, 200, 200, 0.75)',
                     hoverBorderColor: 'rgba(200, 200, 200, 1)',

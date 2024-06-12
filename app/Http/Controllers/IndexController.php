@@ -6,7 +6,7 @@ use App\AttendanceSession;
 use App\Batch;
 use App\Student;
 use App\StudentEnroll;
-use App\TvecExamResult;
+use App\kafaExamResult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -43,26 +43,29 @@ class IndexController extends Controller
                 return redirect()->route('index')->with(['warning' => 'Invalid Batch Name. Try again.']);
             }
             $batches[] = $batch;
-            $result = TvecExamResult::select('module_id', 'tvec_exams.exam_type',
-                DB::raw('max(tvec_exam_results.attempt) as attempt'),
-                DB::raw('max(tvec_exam_results.result) as result'),
+            $result = kafaExamResult::select(
+                'module_id',
+                'kafa_exams.exam_type',
+                DB::raw('max(kafa_exam_results.attempt) as attempt'),
+                DB::raw('max(kafa_exam_results.result) as result'),
                 DB::raw('max(modules.name) as module_name'),
                 DB::raw('max(modules.code) as module_code'),
-                DB::raw('max(tvec_exams.exam_date) as exam_date'))
-                ->leftJoin('tvec_exams', 'tvec_exams.id', '=', 'tvec_exam_results.tvec_exam_id')
-                ->leftJoin('modules', 'modules.id', '=', 'tvec_exams.module_id')
-                ->leftJoin('academic_years', 'academic_years.id', '=', 'tvec_exams.academic_year_id')
+                DB::raw('max(kafa_exams.exam_date) as exam_date')
+            )
+                ->leftJoin('kafa_exams', 'kafa_exams.id', '=', 'kafa_exam_results.kafa_exam_id')
+                ->leftJoin('modules', 'modules.id', '=', 'kafa_exams.module_id')
+                ->leftJoin('academic_years', 'academic_years.id', '=', 'kafa_exams.academic_year_id')
                 ->groupBy('module_id')
                 ->groupBy('exam_type')
                 ->orderBy('module_id', 'asc')
                 ->orderBy('exam_type', 'desc')
-                ->where([['student_id', $student_id],['course_id', $batch->course_id]])
+                ->where([['student_id', $student_id], ['course_id', $batch->course_id]])
                 ->get();
             $results[] = $result;
 
         }
 
-//        Attendance Summary Data
+        //        Attendance Summary Data
         $attendances = [];
         foreach ($enrolls as $enroll) {
             $attendance = AttendanceSession::select(
@@ -71,19 +74,20 @@ class IndexController extends Controller
                 DB::raw('count(attendances.id) as total'),
                 DB::raw('sum(attendances.is_present) as present'),
                 DB::raw('max(modules.name) as module_name'),
-                DB::raw('max(modules.code) as module_code'))
+                DB::raw('max(modules.code) as module_code')
+            )
                 ->leftJoin('attendances', 'attendances.attendance_session_id', '=', 'attendance_sessions.id')
                 ->leftJoin('modules', 'attendance_sessions.module_id', '=', 'modules.id')
                 ->groupBy('module_id')
                 ->groupBy('academic_year_id')
                 ->groupBy('modules.name')
                 ->groupBy('modules.code')
-                ->where([['student_id', $student_id],['modules.course_id',$enroll->course_id]])
+                ->where([['student_id', $student_id], ['modules.course_id', $enroll->course_id]])
                 ->get();
-            $attendances [] = $attendance;
+            $attendances[] = $attendance;
         }
         //return response()->json(['Attendances'=>$attendances,'batches'=>$batches],200);
-        return view('result', ['results' => $results, 'exam_types' => $this->exam_types, 'student' => $student, 'batches' => $batches, 'exam_pass' => $this->exam_pass,'attendances'=>$attendances]);
+        return view('result', ['results' => $results, 'exam_types' => $this->exam_types, 'student' => $student, 'batches' => $batches, 'exam_pass' => $this->exam_pass, 'attendances' => $attendances]);
         //return view('result');
     }
 

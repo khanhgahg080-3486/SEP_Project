@@ -12,30 +12,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',[
+Route::get('/', [
     'uses' => 'IndexController@getIndex',
     'as' => 'index'
 ]);
-Route::post('/result',[
+Route::post('/result', [
     'uses' => 'IndexController@getIndexData',
     'as' => 'indexResult'
 ]);
 
-Route::get('/login',[
+Route::get('/login', [
     'uses' => 'UserController@getLoginIndex',
     'as' => 'login'
 ]);
-Route::get('/changePassword',[
+Route::get('/changePassword', [
     'uses' => 'UserController@showChangePasswordForm',
     'as' => 'ChangePassword',
     'middleware' => 'roles',
-    'roles' => ['Admin','Head','Lecturer','MA','Student']
+    'roles' => ['Admin', 'Head', 'Lecturer', 'MA', 'Student']
 ]);
-Route::post('/changePassword',[
+Route::post('/changePassword', [
     'uses' => 'UserController@changePassword',
     'as' => 'changePassword',
     'middleware' => 'roles',
-    'roles' => ['Admin','Head','Lecturer','MA','Student']
+    'roles' => ['Admin', 'Head', 'Lecturer', 'MA', 'Student']
 ]);
 Route::post('/signin', [
     'uses' => 'UserController@postSignIn',
@@ -44,7 +44,7 @@ Route::post('/signin', [
 Route::group(['middleware' => ['auth']], function () {
 
     //Admin Dashboard Data
-    Route::get('/home',[
+    Route::get('/home', [
         'uses' => 'AdminDashboardController@getDashboard',
         'as' => 'home',
         'middleware' => 'roles',
@@ -56,69 +56,69 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'logout'
     ]);
     //Department Data
-    Route::get('/departments/create',[
+    Route::get('/departments/create', [
         'uses' => 'DepartmentController@getDerpartmentCreate',
         'as' => 'department.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/departments',[
+    Route::get('/departments', [
         'uses' => 'DepartmentController@getDerpartments',
         'as' => 'departments',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
 
-    Route::post('/departments/create',[
+    Route::post('/departments/create', [
         'uses' => 'DepartmentController@postCreateDepartment',
         'as' => 'departments.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
 
-    Route::post('/departments/edit',[
+    Route::post('/departments/edit', [
         'uses' => 'DepartmentController@postEditDepartment',
         'as' => 'departments.edit',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
 
-    Route::get('/departments/{d_id}/delete',[
-        'uses'=>'DepartmentController@getDeleteDepartment',
-        'as'=>'departments.delete',
+    Route::get('/departments/{d_id}/delete', [
+        'uses' => 'DepartmentController@getDeleteDepartment',
+        'as' => 'departments.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
     //End Department Data
 
     //Start NVQ Data
-    Route::get('/nvqs',[
+    Route::get('/nvqs', [
         'uses' => 'NvqController@getNvqs',
         'as' => 'nvqs',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/nvqs/create',[
+    Route::get('/nvqs/create', [
         'uses' => 'NvqController@getNvqsCreate',
         'as' => 'nvqs.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/nvqs/create',[
+    Route::post('/nvqs/create', [
         'uses' => 'NvqController@postCreateNvq',
         'as' => 'nvqs.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/nvqs/edit',[
+    Route::post('/nvqs/edit', [
         'uses' => 'NvqController@postEditNvq',
         'as' => 'nvqs.edit',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/nvqs/{n_id}/delete',[
-        'uses'=>'NvqController@getDeleteNvq',
-        'as'=>'nvqs.delete',
+    Route::get('/nvqs/{n_id}/delete', [
+        'uses' => 'NvqController@getDeleteNvq',
+        'as' => 'nvqs.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
@@ -126,68 +126,68 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     //Start Course Data
-    Route::get('/courses',[
+    Route::get('/courses', [
         'uses' => 'CourseController@getCourses',
         'as' => 'courses',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/courses/create',[
+    Route::get('/courses/create', [
         'uses' => 'CourseController@getCourseCreate',
         'as' => 'courses.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/courses/create',[
+    Route::post('/courses/create', [
         'uses' => 'CourseController@postCourseCreate',
         'as' => 'courses.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/courses/edit',[
+    Route::post('/courses/edit', [
         'uses' => 'CourseController@postEditCourse',
         'as' => 'courses.edit',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/courses/{id}/delete',[
-        'uses'=>'CourseController@getDeleteCourse',
-        'as'=>'courses.delete',
+    Route::get('/courses/{id}/delete', [
+        'uses' => 'CourseController@getDeleteCourse',
+        'as' => 'courses.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
     //End Course Data
 
     //Start Module Data
-    Route::get('/modules',[
+    Route::get('/modules', [
         'uses' => 'ModuleController@getModules',
         'as' => 'modules',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/modules/course/{id}',[
+    Route::get('/modules/course/{id}', [
         'uses' => 'ModuleController@getModulesbyCourse',
         'as' => 'modules.course',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
 
-    Route::get('/modules/create',[
+    Route::get('/modules/create', [
         'uses' => 'ModuleController@getModuleCreate',
         'as' => 'modules.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/modules/create',[
+    Route::post('/modules/create', [
         'uses' => 'ModuleController@postModuleCreate',
         'as' => 'modules.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
 
-    Route::get('/modules/{id}/delete',[
-        'uses'=>'ModuleController@getDeleteModule',
-        'as'=>'modules.delete',
+    Route::get('/modules/{id}/delete', [
+        'uses' => 'ModuleController@getDeleteModule',
+        'as' => 'modules.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
@@ -200,46 +200,46 @@ Route::group(['middleware' => ['auth']], function () {
     //End Module Data
 
     //Students Start Data
-    Route::get('/students',[
+    Route::get('/students', [
         'uses' => 'StudentController@getStudents',
         'as' => 'students',
         'middleware' => 'roles',
-        'roles' =>['Admin']
+        'roles' => ['Admin']
     ]);
-    Route::get('/students/batch/{id}',[
+    Route::get('/students/batch/{id}', [
         'uses' => 'StudentController@getStudentsbyBatch',
         'as' => 'students.batch',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/students/course/{id}',[
+    Route::get('/students/course/{id}', [
         'uses' => 'StudentController@getStudentsbyCourse',
         'as' => 'students.course',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/students/academic/{id}',[
+    Route::get('/students/academic/{id}', [
         'uses' => 'StudentController@getStudentsbyAcademicYear',
         'as' => 'students.academic',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
 
-    Route::get('/students/create',[
+    Route::get('/students/create', [
         'uses' => 'StudentController@getStudentCreate',
         'as' => 'students.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/students/create',[
+    Route::post('/students/create', [
         'uses' => 'StudentController@postCreateStudent',
         'as' => 'students.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/students/{id}/delete',[
-        'uses'=>'StudentController@getDeleteStudent',
-        'as'=>'students.delete',
+    Route::get('/students/{id}/delete', [
+        'uses' => 'StudentController@getDeleteStudent',
+        'as' => 'students.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
@@ -259,7 +259,7 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'StudentController@getCoursesIndex',
         'as' => 'students.courses',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
     Route::get('/students/{id}/attendance', [
         'uses' => 'StudentController@getCoursesIndex',
@@ -276,92 +276,92 @@ Route::group(['middleware' => ['auth']], function () {
     //End Student Data
 
     //Start Academic Year Data
-    Route::get('/academics',[
+    Route::get('/academics', [
         'uses' => 'AcademicYearController@getAcademicYears',
         'as' => 'academics',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/academics/create',[
+    Route::get('/academics/create', [
         'uses' => 'AcademicYearController@getAcademicYearCreate',
         'as' => 'academics.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/academics/create',[
+    Route::post('/academics/create', [
         'uses' => 'AcademicYearController@postCreateAcademicYear',
         'as' => 'academics.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/academics/{id}/edit',[
+    Route::get('/academics/{id}/edit', [
         'uses' => 'AcademicYearController@getEditAcademicYear',
         'as' => 'academics.edit',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/academics/{id}/delete',[
-        'uses'=>'AcademicYearController@getDeleteAcademicYear',
-        'as'=>'academics.delete',
+    Route::get('/academics/{id}/delete', [
+        'uses' => 'AcademicYearController@getDeleteAcademicYear',
+        'as' => 'academics.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
     //End Academic Year Data
 
     //Start Batches Data
-    Route::get('/batches',[
+    Route::get('/batches', [
         'uses' => 'BatchController@getBatches',
         'as' => 'batches',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/batches/create',[
+    Route::get('/batches/create', [
         'uses' => 'BatchController@getBatchCreate',
         'as' => 'batches.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/batches/create',[
+    Route::post('/batches/create', [
         'uses' => 'BatchController@postCreateBatch',
         'as' => 'batches.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/batches/{id}/edit',[
+    Route::get('/batches/{id}/edit', [
         'uses' => 'BatchController@getEditBatch',
         'as' => 'batches.edit',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/batches/{id}/delete',[
-        'uses'=>'BatchController@getDeleteBatch',
-        'as'=>'batches.delete',
+    Route::get('/batches/{id}/delete', [
+        'uses' => 'BatchController@getDeleteBatch',
+        'as' => 'batches.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
     //End Batches Data
 
     //Start Employees Data
-    Route::get('/employees',[
+    Route::get('/employees', [
         'uses' => 'EmployeeController@getEmployees',
         'as' => 'employees',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
 
-    Route::get('/employees/create',[
+    Route::get('/employees/create', [
         'uses' => 'EmployeeController@getEmployeeCreate',
         'as' => 'employees.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/employees/create',[
+    Route::post('/employees/create', [
         'uses' => 'EmployeeController@postCreateEmployee',
         'as' => 'employees.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/employees/search',[
+    Route::post('/employees/search', [
         'uses' => 'EmployeeController@postSearchEmployee',
         'as' => 'employees.search',
         'middleware' => 'roles',
@@ -369,125 +369,125 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
     //End Employee Data
 
-    //Start TVEC Exam Data
-    Route::post('/tvec/exams/batch',[
-        'uses' => 'TvecExamController@getTvecExamsByCourseBatch',
-        'as' => 'tvec.exams.batch',
+    //Start kafa Exam Data
+    Route::post('/kafa/exams/batch', [
+        'uses' => 'kafaExamController@getkafaExamsByCourseBatch',
+        'as' => 'kafa.exams.batch',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/exams',[
-        'uses' => 'TvecExamController@getTvecExams',
-        'as' => 'tvec.exams',
+    Route::get('/kafa/exams', [
+        'uses' => 'kafaExamController@getkafaExams',
+        'as' => 'kafa.exams',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/exams/create',[
-        'uses' => 'TvecExamController@getTvecExamCreate',
-        'as' => 'tvec.exams.create',
+    Route::get('/kafa/exams/create', [
+        'uses' => 'kafaExamController@getkafaExamCreate',
+        'as' => 'kafa.exams.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/tvec/exams/create',[
-        'uses' => 'TvecExamController@postTvecExamCreate',
-        'as' => 'tvec.exams.create',
+    Route::post('/kafa/exams/create', [
+        'uses' => 'kafaExamController@postkafaExamCreate',
+        'as' => 'kafa.exams.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/tvec/exams/{id}/delete',[
-        'uses'=>'TvecExamController@getDeleteTvecExam',
-        'as'=>'tvec.exams.delete',
+    Route::post('/kafa/exams/{id}/delete', [
+        'uses' => 'kafaExamController@getDeletekafaExam',
+        'as' => 'kafa.exams.delete',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/exams/{id}',[
-        'uses' => 'TvecExamResultController@getLecturerTvecExamsResult',
-        'as' => 'tvec.exams.results.view',
+    Route::get('/kafa/exams/{id}', [
+        'uses' => 'kafaExamResultController@getLecturerkafaExamsResult',
+        'as' => 'kafa.exams.results.view',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/exams/{id}/results',[
-        'uses' => 'TvecExamController@getTvecExamsResults',
-        'as' => 'tvec.exams.results',
+    Route::get('/kafa/exams/{id}/results', [
+        'uses' => 'kafaExamController@getkafaExamsResults',
+        'as' => 'kafa.exams.results',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/tvec/exams/results/create',[
-        'uses' => 'TvecExamResultController@postTvecExamsResultsCreate',
-        'as' => 'tvec.exams.results.create',
+    Route::post('/kafa/exams/results/create', [
+        'uses' => 'kafaExamResultController@postkafaExamsResultsCreate',
+        'as' => 'kafa.exams.results.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/results',[
-        'uses' => 'TvecExamResultController@getTvecResults',
-        'as' => 'tvec.results',
+    Route::get('/kafa/results', [
+        'uses' => 'kafaExamResultController@getkafaResults',
+        'as' => 'kafa.results',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/results/batch/{id}',[
-        'uses' => 'TvecExamResultController@getTvecExamsResultsbyBatch',
-        'as' => 'tvec.exams.results.batch',
+    Route::get('/kafa/results/batch/{id}', [
+        'uses' => 'kafaExamResultController@getkafaExamsResultsbyBatch',
+        'as' => 'kafa.exams.results.batch',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/tvec/results/batch/{id}/pass',[
-        'uses' => 'TvecExamResultController@getTvecExamsResultsbyBatchPass',
-        'as' => 'tvec.exams.results.batch.pass',
+    Route::get('/kafa/results/batch/{id}/pass', [
+        'uses' => 'kafaExamResultController@getkafaExamsResultsbyBatchPass',
+        'as' => 'kafa.exams.results.batch.pass',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::post('/tvec/results/batch',[
-        'uses' => 'TvecExamResultController@postTvecExamsResultsbyBatch',
-        'as' => 'tvec.results.batch',
+    Route::post('/kafa/results/batch', [
+        'uses' => 'kafaExamResultController@postkafaExamsResultsbyBatch',
+        'as' => 'kafa.results.batch',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/tvec/results/batch/{id}/pdf',[
-        'uses' => 'TvecExamResultController@getTvecExamsResultsbyBatchPDF',
-        'as' => 'tvec.exams.results.batch.pdf',
+    Route::get('/kafa/results/batch/{id}/pdf', [
+        'uses' => 'kafaExamResultController@getkafaExamsResultsbyBatchPDF',
+        'as' => 'kafa.exams.results.batch.pdf',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/tvec/results/batch/{id}/pass/pdf',[
-        'uses' => 'TvecExamResultController@getTvecExamsResultsbyBatchPassPDF',
-        'as' => 'tvec.exams.results.batch.pass.pdf',
+    Route::get('/kafa/results/batch/{id}/pass/pdf', [
+        'uses' => 'kafaExamResultController@getkafaExamsResultsbyBatchPassPDF',
+        'as' => 'kafa.exams.results.batch.pass.pdf',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    Route::get('/tvec/results/batch/{bid}/student/{id}',[
-        'uses' => 'TvecExamResultController@getTvecExamsResultsbyStudentId',
-        'as' => 'tvec.results.student',
+    Route::get('/kafa/results/batch/{bid}/student/{id}', [
+        'uses' => 'kafaExamResultController@getkafaExamsResultsbyStudentId',
+        'as' => 'kafa.results.student',
         'middleware' => 'roles',
-        'roles' =>['Admin','Head','Lecturer','MA']
+        'roles' => ['Admin', 'Head', 'Lecturer', 'MA']
     ]);
-    //End TVEC Exam Data
+    //End kafa Exam Data
 
-    Route::post('/ajax/course/modules',[
+    Route::post('/ajax/course/modules', [
         'uses' => 'AjaxRequestController@postGetModulesbyCourse',
         'as' => 'ajax.modules',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/ajax/batch/students',[
+    Route::post('/ajax/batch/students', [
         'uses' => 'AjaxRequestController@postGetStudentsbyBatch',
         'as' => 'ajax.students.batch',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/ajax/student/reg',[
+    Route::post('/ajax/student/reg', [
         'uses' => 'AjaxRequestController@postGetStudentbyReg',
         'as' => 'ajax.students.reg',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/ajax/course/batches',[
+    Route::post('/ajax/course/batches', [
         'uses' => 'AjaxRequestController@postGetBatchesbyCourse',
         'as' => 'ajax.batches',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
 
-    Route::get('/admin/users',[
+    Route::get('/admin/users', [
         'uses' => 'UserController@getAllUsers',
         'as' => 'users',
         'middleware' => 'roles',
@@ -512,25 +512,25 @@ Route::group(['middleware' => ['auth']], function () {
         'roles' => 'Admin'
     ]);
 
-    Route::get('/employees/enroll',[
+    Route::get('/employees/enroll', [
         'uses' => 'EmployeeModuleController@getEnrollIndex',
         'as' => 'employees.enroll',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/employees/enroll/create',[
+    Route::get('/employees/enroll/create', [
         'uses' => 'EmployeeModuleController@getEnrollCreateIndex',
         'as' => 'employees.enroll.create',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::get('/e/{id}',[
+    Route::get('/e/{id}', [
         'uses' => 'EmployeeModuleController@getProfileIndex',
         'as' => 'employee.profile',
         'middleware' => 'roles',
         'roles' => ['Admin']
     ]);
-    Route::post('/employees/enroll/create',[
+    Route::post('/employees/enroll/create', [
         'uses' => 'EmployeeModuleController@postEnrollCreate',
         'as' => 'employees.enroll.create',
         'middleware' => 'roles',
@@ -547,68 +547,68 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'AttendanceSessionController@getManageIndex',
         'as' => 'attendance.manage',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::get('/attendance/session/{mid}/{aid}', [
         'uses' => 'AttendanceSessionController@getSessionIndex',
         'as' => 'attendance.session',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::post('/attendance/session', [
         'uses' => 'AttendanceSessionController@postSessionCreate',
         'as' => 'attendance.session.create',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::post('/attendance/sessions/detete', [
         'uses' => 'AttendanceSessionController@postSessionsDelete',
         'as' => 'attendance.sessions.detete',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::post('/attendance/session/detete/{id}', [
         'uses' => 'AttendanceSessionController@postSessionDelete',
         'as' => 'attendance.session.detete',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
 
     Route::get('/attendance/take/{id}', [
         'uses' => 'AttendanceController@getTakeIndex',
         'as' => 'attendance.take',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::post('/attendance/take', [
         'uses' => 'AttendanceController@getTakeCreate',
         'as' => 'attendance.take.create',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::get('/attendances', [
         'uses' => 'AttendanceController@getAttendancesIndex',
         'as' => 'attendances',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD']
+        'roles' => ['Admin', 'HOD']
     ]);
     Route::post('/attendances', [
         'uses' => 'AttendanceController@postAttendancesbyBatch',
         'as' => 'attendances.batch',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD']
+        'roles' => ['Admin', 'HOD']
     ]);
     Route::get('/attendance/report/{mid}/{aid}', [
         'uses' => 'AttendanceController@getReportIndex',
         'as' => 'attendance.report',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
     Route::get('/attendance/view/{sid}/{mid}/{aid}', [
         'uses' => 'AttendanceController@getViewIndex',
         'as' => 'attendance.view',
         'middleware' => 'roles',
-        'roles' => ['Admin','HOD','Lecturer']
+        'roles' => ['Admin', 'HOD', 'Lecturer']
     ]);
 
     //Student Route
@@ -630,9 +630,9 @@ Route::group(['middleware' => ['auth']], function () {
         'middleware' => 'roles',
         'roles' => 'Student'
     ]);
-    Route::get('/student/tvecexams', [
-        'uses' => 'TvecExamResultController@getStudentExamsIndex',
-        'as' => 'student.tvecexams',
+    Route::get('/student/kafaexams', [
+        'uses' => 'kafaExamResultController@getStudentExamsIndex',
+        'as' => 'student.kafaexams',
         'middleware' => 'roles',
         'roles' => 'Student'
     ]);
@@ -676,15 +676,15 @@ Route::group(['middleware' => ['auth']], function () {
         'middleware' => 'roles',
         'roles' => 'Lecturer'
     ]);
-    Route::get('/lecturer/tvec/exams', [
-        'uses' => 'TvecExamController@getLecturerTvecExams',
-        'as' => 'lecturer.tvec.exams',
+    Route::get('/lecturer/kafa/exams', [
+        'uses' => 'kafaExamController@getLecturerkafaExams',
+        'as' => 'lecturer.kafa.exams',
         'middleware' => 'roles',
         'roles' => 'Lecturer'
     ]);
-    Route::get('/lecturer/tvec/exams/{id}', [
-        'uses' => 'TvecExamResultController@getLecturerTvecExamsResult',
-        'as' => 'lecturer.tvec.exams.result',
+    Route::get('/lecturer/kafa/exams/{id}', [
+        'uses' => 'kafaExamResultController@getLecturerkafaExamsResult',
+        'as' => 'lecturer.kafa.exams.result',
         'middleware' => 'roles',
         'roles' => 'Lecturer'
     ]);

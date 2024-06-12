@@ -7865,7 +7865,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -71113,9 +71113,9 @@ $('#course_id').change(function (event) {
       $("#modules").append(new Option(this.name, this.id));
     });
   });
-}); //TVEC EXAM Results 
+}); //kafa EXAM Results
 
-$('#tvec_exam_results_add_batch').on('click', function (event) {
+$('#kafa_exam_results_add_batch').on('click', function (event) {
   event.preventDefault();
   var batch_id = event.target.dataset['batch'];
   $.ajax({
@@ -71127,7 +71127,7 @@ $('#tvec_exam_results_add_batch').on('click', function (event) {
     }
   }).done(function (msg) {
     $.each(msg['students'], function () {
-      $("#tvec_exam_results").append('<tr>\
+      $("#kafa_exam_results").append('<tr>\
             <td>' + this.reg_no + '</td>\
             <td>' + this.shortname + '</td>\
             <td>\
@@ -71147,11 +71147,11 @@ $('#tvec_exam_results_add_batch').on('click', function (event) {
             </td>\
             </tr>');
     });
-    $('#tvec_exam_results_add_batch').hide();
+    $('#kafa_exam_results_add_batch').hide();
   });
 });
-$('#tvec_exam_results_add_repeat').on('click', function (event) {
-  var student_reg = $('#tvec_exam_results_name_repeat').val();
+$('#kafa_exam_results_add_repeat').on('click', function (event) {
+  var student_reg = $('#kafa_exam_results_name_repeat').val();
   $.ajax({
     method: 'POST',
     url: urlStudentByReg,
@@ -71161,7 +71161,7 @@ $('#tvec_exam_results_add_repeat').on('click', function (event) {
     }
   }).done(function (msg) {
     $.each(msg['students'], function () {
-      $("#tvec_exam_results").append('<tr class="table-info">\
+      $("#kafa_exam_results").append('<tr class="table-info">\
             <td>' + this.reg_no + '</td>\
             <td>' + this.shortname + '</td>\
             <td>\

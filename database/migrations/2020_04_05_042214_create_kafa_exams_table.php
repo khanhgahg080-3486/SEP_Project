@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTvecExamsTable extends Migration
+class CreatekafaExamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTvecExamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tvec_exams', function (Blueprint $table) {
+        Schema::create('kafa_exams', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('module_id')->unsigned();
             $table->foreign('module_id')->references('id')->on('modules')->onUpdate('cascade');
@@ -35,6 +35,6 @@ class CreateTvecExamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tvec_exams');
+        Schema::dropIfExists('kafa_exams');
     }
 }

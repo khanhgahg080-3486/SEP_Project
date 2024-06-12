@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTvecExamPassToStudentEnrolls extends Migration
+class AddkafaExamPassToStudentEnrolls extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddTvecExamPassToStudentEnrolls extends Migration
     public function up()
     {
         Schema::table('student_enrolls', function (Blueprint $table) {
-            $table->tinyInteger('tvec_exam_modules')->nullable();
-            $table->tinyInteger('tvec_exam_pass')->nullable();
+            $table->tinyInteger('kafa_exam_modules')->nullable();
+            $table->tinyInteger('kafa_exam_pass')->nullable();
 
         });
     }
